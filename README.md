@@ -6,3 +6,7 @@ features are packaged by feature , and each model is organized as feature and or
 in a single place and allow to add more properties if needed.
 * for simplicity, I used INTEGER as primary key for all tables, but in the real world scenario I would use UUID V7 for better scalability and uniqueness across distributed systems and fast indexing
 * Hash Password before save into db and use strong salt 12 to 14 chars to prevent rainbow table
+
+## Deployment
+K8S LoadBalancer --> BE Pods --> DB (Single Write + Many Read Replica Instances)
+pls check system-design.pdf file
