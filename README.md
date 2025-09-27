@@ -10,3 +10,13 @@ in a single place and allow to add more properties if needed.
 ## Deployment
 K8S LoadBalancer --> BE Pods --> DB (Single Write + Many Read Replica Instances)
 pls check system-design.pdf file
+
+## Enhancements
+* use JWT for authentication and authorization
+* use Redis for caching
+* use RabbitMQ or Kafka for async processing like sending email
+* use ELK stack for logging and monitoring
+* use OpenAPI for API documentation
+* use Docker for containerization
+* use CI/CD for continuous integration and deployment
+* use Helm for K8S deployment

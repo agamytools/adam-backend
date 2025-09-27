@@ -1,4 +1,4 @@
-import {Body, Controller, Post} from "@nestjs/common";
+import {Body, Controller, Get, ParseIntPipe, Post, Query} from "@nestjs/common";
 import {BookingService} from "../service/booking.service";
 import {CreateCustomerBookingRequestDto} from "../dto/create-customer-booking-request.dto";
 
@@ -16,5 +16,18 @@ export class BookingController {
         @Body() createBookingRequestDto: CreateCustomerBookingRequestDto
     ) {
         return this.bookingService.createBookingRequest(createBookingRequestDto);
+    }
+
+    @Get('/my-bookings')
+    async getMyBookings(
+        @Query("customerId",ParseIntPipe) customerId: number,
+        @Query("offset",ParseIntPipe) offset: number,
+        @Query("limit",ParseIntPipe) limit: number
+    ) {
+    return this.bookingService.getMyBookings({
+        customerId,
+        offset,
+        limit
+    });
     }
 }

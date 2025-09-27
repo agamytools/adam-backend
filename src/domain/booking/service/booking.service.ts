@@ -315,4 +315,31 @@ export class BookingService {
         });
     }
 
+    async getMyBookings(params: { customerId: number; offset: number; limit: number }) {
+        const response: any = {
+            total: -1,
+            records: []
+        };
+        if (params.offset == 0) {
+            // calculate total count only on the first page
+            response.total = await this.bookingRepository.count({
+                where: {
+                    customerId: params.customerId
+                }
+            });
+        }
+        // fetch paginated records
+        response.records = await this.bookingRepository.findAll({
+            where: {
+                customerId: params.customerId,
+                startTime: {
+                    [Op.gte]: new Date() // Only future bookings
+                }
+            },
+            order: [['startTime', 'ASC']],
+            offset: params.offset,
+            limit: params.limit,
+        });
+        return response;
+    }
 }
